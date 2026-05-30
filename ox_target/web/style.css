@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --primary: #9effea;
+  --bg-main: #181b24;
+  --bg-surface: #181b22;
+  --text-dim: rgba(255, 255, 255, 0.45);
+}
+
+body {
+  visibility: hidden;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  user-select: none;
+  background: transparent;
+}
+
+p {
+  margin: 0;
+}
+
+#rayka-target-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  z-index: 100;
+}
+
+.octagon-core {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--text-dim);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1), background-color 0.2s ease;
+}
+
+.octagon-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px solid var(--primary);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.eye-hover .octagon-core {
+  background: var(--primary);
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+.eye-hover .octagon-ring {
+  opacity: 0.3;
+  transform: scale(1);
+}
+
+#options-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rayka-container {
+  position: absolute;
+  width: 185px;
+  height: 36px;
+  background: var(--bg-main);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
+  transition:
+    left 0.45s cubic-bezier(0.2, 1, 0.2, 1),
+    top 0.45s cubic-bezier(0.2, 1, 0.2, 1),
+    opacity 0.25s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.rayka-container.spawned {
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.rayka-container:hover {
+  opacity: 1;
+  background-color: var(--bg-surface);
+  color: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px #9effea62,
+    inset 0 0 14px #9effea15;
+}
+
+.rayka-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 2px;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.rayka-container:hover::before {
+  opacity: 1;
+}
+
+.rayka-icon {
+  font-size: 13px;
+  margin-right: 12px;
+  color: inherit;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.rayka-container:hover .rayka-icon {
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+.rayka-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
